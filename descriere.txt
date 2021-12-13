@@ -6,3 +6,12 @@ materie : id, nume, detalii, punctaj (has many cursuri si seminarii), data_exame
 curs: id, nume_curs, body_curs, link_section, nume_profesor, email_profesor
 seminar: id, nume_seminar, body_seminar, link_section, nume_profesor, email_profesor 
 
+
+
+git remote add origin https://github.com/eduardnegoita1337/proiectTW
+
+
+
+git commit -m "initial-commit"
+
+
