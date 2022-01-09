@@ -9,20 +9,20 @@ const User = sequelize.define('user',{
     id: {
         type:Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
-        allowNull: false,
+        allowNull: true,
         primaryKey: true
     },
     userName : {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     password: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     email: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
             isEmail: true
         }

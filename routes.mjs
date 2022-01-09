@@ -54,5 +54,78 @@ router.route('/labs/:id')
 .patch((request, response) => patchRecord(Lab, request, response))
 .delete((request, response) => deleteRecord(Lab, request, response))
 
+//initializam user 
+var user = {
+    id: null,
+    userName: null,
+    password: null,
+    email: null
+}
+
+//ruta inregistrare
+router.route("/register").post((req, res) => {
+
+    //findOne()-cauta dupa un element cu acelasi nume
+    User.findOne({
+        where: {
+            userName: req.body.userName,
+        }
+    }).then((result) => { //result va fii inregistrarea cu numele daca exista,daca nu mai exista niciun utilizator cu numele acela result va fii null
+
+        if (result !== null) {
+            res.send("Exista deja acest nume de utilizator")
+        }
+        else {
+            var numbers = /[0-9]/g;
+            var litereMari = /[A-Z]/g;
+            var litereMici = /[a-z]/g;
+            if (req.body.password.match(litereMari) && req.body.password.match(litereMici) && req.body.password.match(numbers) && req.body.password.length >= 8) {
+                User.create({
+                    userName: req.body.userName,
+                    password: req.body.password,
+                    email: req.body.email,
+                }).then(result => res.json(result))
+                res.send("Te-ai inregistrat!")
+            }
+            else {
+                res.json("Parola trebuie sa contina cel putin 8 caractere,o litera mica,o litera mare si o cifra")
+            }
+        }
+    });
+
+})
+
+
+
+router.route("/login").get((req, res) => {
+    User.findOne({
+        where: {
+            userName: req.query.userId,
+            password: req.query.password
+        }
+    }).then((result) => {
+        if (result !== null) {
+            user.id = result.userId;
+            user.password = result.password;
+            user.userName = result.nume;
+            user.email = result.email;
+            let id = user.id
+            res.json(id + "");
+        }
+        else {
+            (User.findOne({
+                where: {
+                    userName: req.query.userId
+                }
+            }).then((result) => {
+                if (result !== null) {
+                    let p = result.password;
+                    res.json("Parola incorecta!")
+                }
+                else { res.json("Logarea a esuat! Ne pare rau! Incearca sa iti creezi mai intai un cont") }
+            }))
+        }
+    });
+});
 
 export default router;
