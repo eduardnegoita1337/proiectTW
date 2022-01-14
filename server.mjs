@@ -8,10 +8,10 @@ application.use(json());
 application.use(cors());
 application.use('/api', routes);
 
-application.listen(3000, async () => {
+application.listen(8080, async () => {
     try {
         await initialize();
     } catch (error) {
         console.error(error);
     }
-});
+}); 

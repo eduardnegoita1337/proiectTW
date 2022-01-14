@@ -3,6 +3,7 @@ import {User, Subject, Course, Lab} from './repository.mjs';
 import {getRecords, postRecord, deleteRecords, getRecord,
 headRecord, putRecord, patchRecord, deleteRecord} from './service.mjs';
 
+
 const router = express.Router();
 
 router.route('/users')
@@ -127,5 +128,6 @@ router.route("/login").get((req, res) => {
         }
     });
 });
+
 
 export default router;

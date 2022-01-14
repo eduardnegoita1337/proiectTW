@@ -21,10 +21,10 @@ class Login extends Component {
 
     apelare() {
         if (localStorage.getItem("userId") !== null) {
-            this.props.history.push("/PaginaPrincipala");
+            this.props.history.push("/mainPage");
         }
         else {
-            this.props.history.push("/PaginaPrincipala");
+            this.props.history.push("/mainPage");
         }
 
     }
@@ -72,7 +72,7 @@ class LoginBox extends Component {
 
     }
     submitLogin() {
-        axios.get("http://localhost:3000/users?userName=" + this.state.userName + "&Password=" + this.state.password)
+        axios.get("http://localhost:8080/api/users?userName=" + this.state.userName + "&Password=" + this.state.password)
             .then((res) => {
                 if (res.data === "Logarea a esuat! Ne pare rau! Incearca sa iti creezi mai intai un cont") {
                     alert("Logarea a esuat");
@@ -139,7 +139,7 @@ class RegisterBox extends Component {
             },
             body: JSON.stringify(user)
         });*/
-        axios.post("http://localhost:3000/api/users", { 
+        axios.post("http://localhost:8080/api/users", { 
         userName: this.state.userName,
         password: this.state.password,
         email: this.state.email
