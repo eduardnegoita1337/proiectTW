@@ -1,31 +1,30 @@
 import './App.css';
 import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import login from './components/login';
-import MainPage from './components/mainPage';
-import { Container, Row, Col } from "react-bootstrap";
-import Sidebar from './components/sidebar';
+import Home from './components/Home';
+import Labs from './components/Labs';
+import Courses from './components/Courses';
+import Navbar from './components/navbar'
+import Subjects from './components/Subjects';
 
 
 function App() {
     return (
-      <Container fluid>
-        <Row>
-          <Col lg={2} id="sidebar-wrapper" className="d-none d-sm-block">
-          <Sidebar/>
-          </Col>
-          <Col lg={10} xs={12} id="page-content-wrapper">
-          <BrowserRouter>
-          <div className="App">
+        <>
+          <Router>
+          <Navbar/>
           <Switch>
-            <Route path="/" render={(props)=><MainPage/>}/>
+            <Route path="/" exact component={Home}/>
+            <Route path="/labs"  component={Labs}/>
             <Route path="/login" exact strict component={login} />
+            <Route path="/courses"  component={Courses}/>
+            <Route path="/subjects"  component={Subjects}/>
+
+
           </Switch>
-          </div>
-          </BrowserRouter>
-        </Col>
-        </Row>
-        </Container>
+          </Router>
+          </>
     );
   }
 

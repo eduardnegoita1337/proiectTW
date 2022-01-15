@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import axios from 'axios'
 import { AppBar, Toolbar, Button, Typography } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Sidebar = (props) => {
-    const [subjects, setSubjects] = useState([]);
-    useEffect(() => {
-        axios.get("http://localhost:8080/api/subjects")
-        .then((mappedApiSubjects) => {
-            setSubjects(mappedApiSubjects);
-        }); 
-    }, [props]);
+  const Sidebar = (props) => {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "http://localhost:8080/api/subjects", false ); // false for synchronous request
+    xmlHttp.send( null );
+    var object = JSON.parse(xmlHttp.responseText);
+    var objectList = Object.keys(object).forEach(k => (
+      <li
+       key={k}
+      ><strong>{k}</strong>: {object[k]}</li>
+    ));
+    
 
     return ( 
-        <Nav className="col-md-12 d-md-block bg-light sidebar">
-            {subjects.map((s) => (
-        <Nav.Item key={s.id}>
-          <Nav.Link key={s.id} as={Link}  to={`http://localhost:8080/api/subjects/${s.id}`}>
-            {s.name}
-          </Nav.Link>
-        </Nav.Item>
+<ul>{objectList}</ul>
         
-      ))}
-        </Nav>
     );
 };
 
