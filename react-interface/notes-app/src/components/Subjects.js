@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import axios from 'axios';
 
 
-var datas = [];
+
 axios.get('http://localhost:8080/api/subjects').then(res => {
     datas = res.data;
 });
