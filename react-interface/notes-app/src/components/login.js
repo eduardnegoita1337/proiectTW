@@ -21,10 +21,10 @@ class Login extends Component {
 
     apelare() {
         if (localStorage.getItem("userId") !== null) {
-            this.props.history.push("/mainPage");
+            this.props.history.push("/labs");
         }
         else {
-            this.props.history.push("/mainPage");
+            this.props.history.push("/labs");
         }
 
     }
@@ -195,4 +195,4 @@ class RegisterBox extends Component {
 }
 
 
-export default withRouter(Login);
+export default Login;

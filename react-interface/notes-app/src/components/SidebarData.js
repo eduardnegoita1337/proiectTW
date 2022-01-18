@@ -31,5 +31,11 @@ export const SidebarData = [
         path: '/courses',
         icon: <AiIcons.AiFillBook/>,
         cName: 'nav-text'
+    },
+    {
+        title: 'Subjects',
+        path: '/subjects',
+        icon: <AiIcons.AiFillCalendar/>,
+        cName: 'nav-text'
     }
 ]
